@@ -1,0 +1,219 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* video module course purchase table */
+
+.row {
+  display: flex;
+}
+
+.row.header .col {
+  font-weight: bold;
+}
+
+.video-course-modules-table .col {
+  border: 1px solid darkgray;
+  border-left: none;
+  border-top: none;
+  padding: 5px 8px;
+  font-size: .9em;
+}
+
+.video-course-modules-table .col:first-child {
+  border-left: 1px solid darkgray;
+}
+
+.video-course-modules-table .row:first-child .col {
+  border-top: 1px solid darkgray;
+}
+
+.video-course-modules-table .col.mod-col {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.video-course-modules-table .video-module-title > span {
+  display: inline-block;
+  width: 100%;
+  cursor: default;
+}
+
+/* video module buttons */
+
+.btn.btn-video-module {
+  margin: auto 0;
+  border: 0;
+  border-radius: 0;
+  outline: 1px solid gray !important;
+  padding: 2px 5px !important;
+  height: auto;
+  color: black;
+  font-size: .9em;
+  line-height: 1.5 !important;
+}
+
+.btn.btn-purchased {
+  background-color: lightskyblue;
+}
+
+.btn.btn-not-available {
+  background-color: lightgray;
+  cursor: default;
+}
+
+.btn.btn-buy-now {
+  background-color: palegreen;
+}
+
+/**
+ * bootstrap tooltip custom color overrides
+ *
+ * possible colors to choose from:
+ *
+ * - bisque
+ * - darkkhaki
+ * - khaki
+ * - gold
+ * - lavender
+ * - lightgray
+ * - lightsalmon
+ * - lightskyblue
+ * - palegreen
+ * - pink
+ * - sandybrown
+ * - tan
+ * - thistle
+ */
+
+/* "AND" modules */
+
+.tooltip-bg-0.show,
+.tooltip-bg-1.show,
+.tooltip-bg-2.show {
+  opacity: 1;
+}
+
+.tooltip-bg-0 .tooltip-inner {
+  color: #666;
+  background-color: bisque;
+}
+
+.tooltip-bg-0[data-popper-placement^="left"] .tooltip-arrow::before {
+  border-left-color: bisque;
+}
+
+.tooltip-bg-0[data-popper-placement^="right"] .tooltip-arrow::before {
+  border-right-color: bisque;
+}
+
+/* "OR" modules, group 1 */
+
+.tooltip-bg-1 .tooltip-inner {
+  color: #666;
+  background-color: thistle;
+}
+
+.tooltip-bg-1[data-popper-placement^="left"] .tooltip-arrow::before {
+  border-left-color: thistle;
+}
+
+.tooltip-bg-1[data-popper-placement^="right"] .tooltip-arrow::before {
+  border-right-color: thistle;
+}
+
+/* OR modules, group 2 */
+
+.tooltip-bg-2 .tooltip-inner {
+  color: #666;
+  background-color: pink;
+}
+
+.tooltip-bg-2[data-popper-placement^="left"] .tooltip-arrow::before {
+  border-left-color: pink;
+}
+
+.tooltip-bg-2[data-popper-placement^="right"] .tooltip-arrow::before {
+  border-right-color: pink;
+}
+
+/* responsive video player embed */
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.embed-responsive::before {
+  display: block;
+  content: "";
+}
+
+.embed-responsive .embed-responsive-item,
+.embed-responsive embed,
+.embed-responsive iframe,
+.embed-responsive object,
+.embed-responsive video {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.embed-responsive-21by9::before {
+  padding-top: 42.857143%;
+}
+
+.embed-responsive-16by9::before {
+  padding-top: 56.25%;
+}
+
+.embed-responsive-4by3::before {
+  padding-top: 75%;
+}
+
+.embed-responsive-1by1::before {
+  padding-top: 100%;
+}

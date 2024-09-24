@@ -1,0 +1,7 @@
+# Video course modules table React component
+
+This example component simulates the UX of the purchasing flow for a module-based video course. It allow users to purchase up to 10 modules from a complete video course, one module at a time. Each module can only be purchased if one or more previous modules have already been purchased. If a module is available for purchase (aka "Unlocked"), the Buy button will be enabled. If there are unlocking requirements for the module, those requirements will be displayed to the user as tooltips which instruct them which modules must be purchased first in order to satisfy the unlocking rules. The unlocking rules are based on purchasing one or more other modules, any one out of a set of other modules, or some combination of both.
+
+The unlocking tooltips are color coded to indicate which modules needed to be purchased first, and are separated visually by color to delineate the different purchase requirement groups. The component code responds to button hover events and checks the user's previous purchases to compare with the prerequisites to determine which tooltips to display based on the unlocking rules. When the button is hovered, the row-level component determines if the module is unlocked and which (if any) prerequisites exist in order to buy it, and updates the table component state with that information. The row-level components get that updated state and then display a tooltip next to the button, if applicable.
+
+[Live demo](https://stackblitz.com/~/github.com/mattbarnicle/video-course-modules-table)
