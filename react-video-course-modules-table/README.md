@@ -4,4 +4,4 @@ This example component simulates the UX of the purchasing flow for a module-base
 
 The unlocking tooltips are color coded to indicate which modules needed to be purchased first, and are separated visually by color to delineate the different purchase requirement groups. The component code responds to button hover events and checks the user's previous purchases to compare with the prerequisites to determine which tooltips to display based on the unlocking rules. When the button is hovered, the row-level component determines if the module is unlocked and which (if any) prerequisites exist in order to buy it, and updates the table component state with that information. The row-level components get that updated state and then display a tooltip next to the button, if applicable.
 
-[Live demo](https://stackblitz.com/~/github.com/mattbarnicle/video-course-modules-table)
+[Live demo](https://stackblitz.com/edit/vitejs-vite-fyxf48)
