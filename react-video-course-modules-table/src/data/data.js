@@ -150,7 +150,7 @@ export const videoCourse = {
     },
     {
       videoModule: videoModule10,
-      prerequisiteLevels: { allOf: [ 1, 3, 7 ], oneOfEach: [ [ 4, 5 ], [ 6, 9, 11 ] ] },
+      prerequisiteLevels: { allOf: [ 1, 3, 7 ], oneOfEach: [ [ 4, 5 ], [ 6, 9 ] ] },
       level: 10,
     },
   ],
