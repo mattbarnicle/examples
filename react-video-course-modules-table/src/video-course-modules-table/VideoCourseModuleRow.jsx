@@ -16,7 +16,7 @@ const TOOLTIP_CONFIG_FOR_ALL_OF = {
 };
 
 export function VideoCourseModuleRow ({ videoCourseModule }) {
-  const { user } = useContext(UserContext);
+  const { user: { products: userProducts } } = useContext(UserContext);
   const {
     getLevelForVideoModule, prereqLevels
   } = useContext(VideoCourseModulesTableContext);
@@ -25,8 +25,15 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
     videoModule, prerequisiteLevels, level: moduleLevel
   } = videoCourseModule;
 
+  const isLevelPurchased = useCallback((level) => {
+    return Boolean(userProducts.find(up => (
+      up.type === 'video module'
+      && getLevelForVideoModule(up.videoModule) === level
+    )));
+  }, [ userProducts, getLevelForVideoModule ]);
+
   const isModulePurchased = useMemo(() => {
-    return Boolean(user.products.find(up =>
+    return Boolean(userProducts.find(up =>
       (
         up.type === 'video module'
         && up.videoModule._id === videoModule._id
@@ -36,16 +43,9 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
         && up.videoCourse.groups.find(g => g.videoModule._id === videoModule._id)
       )
     ));
-  }, [ user, videoModule ]);
+  }, [ userProducts, videoModule ]);
 
-  const isLevelPurchased = useCallback((level) => {
-    return Boolean(user.products.find(up => (
-      up.type === 'video module'
-      && getLevelForVideoModule(up.videoModule) === level
-    )));
-  }, [ user, getLevelForVideoModule ]);
-
-  const isModuleAvailable = useMemo(() => {
+  const isModuleUnlocked = useMemo(() => {
     return (
       prerequisiteLevels.allOf.every(level => isLevelPurchased(level))
       &&
@@ -55,47 +55,36 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
     );
   }, [ prerequisiteLevels, isLevelPurchased ]);
 
-  const hoverCondition = useMemo(() => {
+  const shouldShowTooltip = useMemo(() => {
+    const oneOfEachLevels = prereqLevels.oneOfEach.find(
+      levels => Boolean(levels.find(level => level === moduleLevel))
+    ) || [];
+
+    const numOneOfEachLevelsPurchased = oneOfEachLevels.reduce(
+      (sum, level) => sum + (isLevelPurchased(level) ? 1 : 0),
+      0
+    );
+
     return (
-      prereqLevels !== null
-      && !isModulePurchased
+      !isModulePurchased
       && (
         Boolean(prereqLevels.allOf.find(level => level === moduleLevel))
         ||
-        Boolean(prereqLevels.oneOfEach.find(
-          levels => levels.find(level => level === moduleLevel)
-        ))
+        (oneOfEachLevels.length > 0 && numOneOfEachLevelsPurchased === 0)
       )
     );
-  }, [ prereqLevels, isModulePurchased, moduleLevel ]);
+  }, [ prereqLevels, moduleLevel, isModulePurchased, isLevelPurchased ]);
 
   const getTooltipConfigForOneOfEach = useCallback(() => {
-    const levels = prereqLevels.oneOfEach.find(
-      levels => Boolean(levels.find(level => level === moduleLevel))
-    );
-
-    const numLevelsNotPurchased = (
-      levels
-        ? levels.reduce(
-            (sum, level) => sum - (isLevelPurchased(level) ? 1 : 0),
-            levels.length
-          )
-        : 0
-    );
-
-    return (
-      numLevelsNotPurchased > 1
-        ? {
-          title: 'One of these is required',
-          backgroundColorCode: (
-            prereqLevels.oneOfEach.findIndex(
-              levels => Boolean(levels.find(level => level === moduleLevel))
-            )
-          ) + 1
-        }
-        : TOOLTIP_CONFIG_FOR_ALL_OF
-    );
-  }, [ prereqLevels, moduleLevel, isLevelPurchased ]);
+    return {
+      title: 'One of these is required',
+      backgroundColorCode: (
+        prereqLevels.oneOfEach.findIndex(
+          levels => Boolean(levels.find(level => level === moduleLevel))
+        )
+      ) + 1
+    };
+  }, [ prereqLevels, moduleLevel ]);
 
   const getTooltipConfig = useCallback(() => {
     return (
@@ -105,11 +94,9 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
     );
   }, [ prereqLevels, moduleLevel, getTooltipConfigForOneOfEach ]);
 
-  const { title, backgroundColorCode } = getTooltipConfig();
-
-  const tooltipClasses = useMemo(() => {
-    return `module-block-buy-tooltip tooltip-bg-${backgroundColorCode}`;
-  }, [ backgroundColorCode ]);
+  const { title, backgroundColorCode } = (
+    shouldShowTooltip ? getTooltipConfig() : {}
+  );
 
   return (
     <div className="row">
@@ -121,17 +108,17 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
         <VideoCourseModuleRowButton
           videoModule={ videoModule }
           isModulePurchased={ isModulePurchased }
-          isModuleAvailable={ isModuleAvailable }
+          isModuleUnlocked={ isModuleUnlocked }
           prerequisiteLevels={ prerequisiteLevels }
         />
       </div>
       <Overlay
         target={ tooltipRef.current }
-        show={ hoverCondition }
+        show={ shouldShowTooltip }
         placement="left"
         transition={
           (props) => (
-            <Fade in={ hoverCondition } timeout={ 0 }>
+            <Fade in={ shouldShowTooltip } timeout={ 0 }>
               { props.children }
             </Fade>
           )
@@ -140,7 +127,9 @@ export function VideoCourseModuleRow ({ videoCourseModule }) {
         {(props) => (
           <Tooltip
             id={ `module-${videoModule._id}-button-tooltip` }
-            className={ tooltipClasses }
+            className={
+              `module-block-buy-tooltip tooltip-bg-${backgroundColorCode || 0}`
+            }
             { ...props }
           >
             { title }

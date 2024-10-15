@@ -5,16 +5,16 @@ import { BuyButton } from './BuyButton.jsx';
 export function VideoCourseModuleRowButton ({
   videoModule,
   isModulePurchased,
-  isModuleAvailable,
+  isModuleUnlocked,
   prerequisiteLevels,
 }) {
   if (isModulePurchased) {
     return <WatchButton />;
   }
-  else if (!isModulePurchased && !isModuleAvailable) {
+  else if (!isModulePurchased && !isModuleUnlocked) {
     return <LockedButton prerequisiteLevels={ prerequisiteLevels } />;
   }
-  else if (!isModulePurchased && isModuleAvailable) {
+  else if (!isModulePurchased && isModuleUnlocked) {
     return <BuyButton videoModule={ videoModule } />;
   }
   else {
