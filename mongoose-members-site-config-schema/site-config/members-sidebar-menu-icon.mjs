@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const CUSTOM_ICON_SIZE_VALIDATOR = [ 25, 'Custom icons must be 25 x 25 pixels' ];
+const CUSTOM_ICON_SIZE_VALIDATOR = [ 15, 'Custom icons must be 15 x 15 pixels' ];
 
 const membersSidebarMenuCustomIconSchema = new mongoose.Schema({
   src: {

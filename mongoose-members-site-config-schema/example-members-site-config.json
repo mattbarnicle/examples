@@ -1,0 +1,244 @@
+[
+  {
+    "members": {
+      "colorScheme": "green",
+      "sidebarMenu": [
+        {
+          "type": "link",
+          "label": "Dashboard",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-home"
+          },
+          "link": {
+            "type": "internal",
+            "internal": {
+              "type": "members",
+              "path": "/members"
+            }
+          }
+        },
+        {
+          "type": "product",
+          "label": "Example video course",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-video-camera"
+          },
+          "product": {
+            "type": "course",
+            "doc": "000fff000fff000fff000fff",
+            "docModel": "VideoCourse"
+          }
+        },
+        {
+          "type": "product",
+          "label": "Example video module",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-video-camera"
+          },
+          "product": {
+            "type": "module",
+            "doc": "000fff000fff000fff000fff",
+            "docModel": "VideoModule"
+          }
+        },
+        {
+          "type": "link",
+          "label": "Paid videos",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-video-camera"
+          },
+          "link": {
+            "type": "internal",
+            "internal": {
+              "type": "members",
+              "path": "/members/videos",
+              "category": "paid"
+            }
+          }
+        },
+        {
+          "type": "link",
+          "label": "Free videos",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-video-camera"
+          },
+          "link": {
+            "type": "internal",
+            "internal": {
+              "type": "members",
+              "path": "/members/videos",
+              "category": "free"
+            }
+          }
+        },
+        {
+          "type": "link",
+          "label": "Affiliate marketing",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-bullhorn"
+          },
+          "link": {
+            "type": "internal",
+            "internal": {
+              "type": "members",
+              "path": "/members/affiliate-marketing"
+            }
+          }
+        },
+        {
+          "type": "link",
+          "label": "Some external website",
+          "icon": {
+            "type": "custom",
+            "custom": {
+              "src": "/_site/images/logo-15x15.png",
+              "width": 15,
+              "height": 15,
+              "className": "site-logo"
+            }
+          },
+          "link": {
+            "type": "external",
+            "external": {
+              "url": "https://example.com",
+              "newWindow": true
+            }
+          }
+        },
+        {
+          "type": "dropdown",
+          "label": "Account",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-user"
+          },
+          "children": [
+            {
+              "type": "link",
+              "link": {
+                "type": "internal",
+                "internal": {
+                  "type": "members",
+                  "path": "/members/subscription"
+                }
+              },
+              "label": "Subscription",
+              "icon": {
+                "type": "fontawesome",
+                "fontawesome": "fa-calendar"
+              }
+            },
+            {
+              "type": "link",
+              "link": {
+                "type": "internal",
+                "internal": {
+                  "type": "members",
+                  "path": "/members/cards"
+                }
+              },
+              "label": "Credit Cards",
+              "icon": {
+                "type": "fontawesome",
+                "fontawesome": "fa-credit-card"
+              }
+            },
+            {
+              "type": "link",
+              "link": {
+                "type": "internal",
+                "internal": {
+                  "type": "members",
+                  "path": "/members/profile"
+                }
+              },
+              "label": "Profile",
+              "icon": {
+                "type": "fontawesome",
+                "fontawesome": "fa-cog"
+              }
+            }
+          ],
+        },
+        {
+          "type": "component",
+          "label": "Logout",
+          "icon": {
+            "type": "fontawesome",
+            "fontawesome": "fa-sign-out"
+          },
+          "component": { "type": "logout" }
+        }
+      ],
+      "dashboard": {
+        "numPanels": 2,
+        "panelWidthRatio": "3:1",
+        "panels": [
+          {
+            "blocks": [
+              {
+                "type": "subscription",
+                "subscription": {
+                  "type": "video course",
+                  "doc": "000fff000fff000fff000fff",
+                  "docModel": "VideoCourse",
+                  "children": [
+                    {
+                      "default": {
+                        "heading": "Your free video",
+                        "video": "000fff000fff000fff000fff",
+                      },
+                      "component": "current"
+                    },
+                    {
+                      "component": "mini table"
+                    },
+                    {
+                      "component": "subscribe"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "product",
+                "product": {
+                  "type": "module",
+                  "doc": "000fff000fff000fff000fff",
+                  "docModel": "VideoModule"
+                }
+              }
+            ],
+          },
+          {
+            "blocks": [
+              {
+                "type": "remote service",
+                "remoteService": {
+                  "type": "remote",
+                  "label": "Workshops",
+                  "path": "/upcoming-workshops",
+                  "remoteHostCode": "XXX"
+                }
+              },
+              {
+                "type": "remote service",
+                "remoteService": {
+                  "type": "remote",
+                  "label": "Online workshop recordings",
+                  "path": "/online-workshop-recordings",
+                  "remoteHostCode": "XXX"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]
