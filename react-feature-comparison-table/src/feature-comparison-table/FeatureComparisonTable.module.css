@@ -1,0 +1,102 @@
+.table {
+  margin-bottom: 0;
+}
+
+.tableHead th {
+  background-color: #E7EFF2;
+}
+
+.tableBody {
+  border-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .tableWrapper {
+    overflow: auto;
+  }
+
+  .table {
+    table-layout: fixed;
+  }
+
+  .tableHead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    width: 33vw;
+    background-color: #E7EFF2;
+  }
+
+  .tableHead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+
+  .tableHead th:nth-child(2) {
+    position: sticky;
+    left: 33vw;
+    z-index: 3;
+  }
+
+  .tableBody th {
+    position: sticky;
+    left: 33vw;
+    width: 33vw;
+    z-index: 1;
+    background-color: white;
+  }
+
+  .tableBody th:first-child {
+    left: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .table {
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .table {
+    font-size: .8rem;
+  }
+}
+
+.productHeadingCell {
+  font-weight: bold;
+  text-align: center;
+}
+
+.tableHead th:nth-child(2) {
+  background-color: #E6E2D7 !important;
+}
+
+.featureLabelCell {
+  font-weight: bold;
+}
+
+.featureCell {
+  text-align: center;
+}
+
+.tableBody th:nth-child(2) {
+  text-align: center;
+  background-color: #FFF1E3 !important;
+  font-weight: normal;
+}
+
+.hasFeatureText {
+  font-weight: bold;
+  color: #17A98A;
+}
+
+.doesNotHaveFeatureText {
+  font-weight: bold;
+  color: #A4A8B3;
+}
+
+.featureText {
+  font-size: .9em;
+}
